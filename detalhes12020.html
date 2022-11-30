@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Left 4 Dead 2</title>
+    <!-- Jquery only -->
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <!-- CSS only -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="container header">
+      <div class="row">
+        <nav class="nav">
+          <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+          <a class="nav-link" href="genres.html">Genres</a>
+          <a class="nav-link" href="publishers.html">Publishers</a>
+          <nav class="navbar nav1">
+          </nav>
+        </nav>
+      </div>
+    </header>
+    <main class="container fluid">
+      <div class="row t" id="tela"></div>
+      <div class="row" id="tela1"></div>
+      <div class="row" id="tela0"><h4>Platforms: </h4></div>
+      <div class="row" id="telas"></div>
+      <div class="row" id="tela2"><h4>Stores: </h4></div>
+      <div class="row" id="tela3"></div>
+      <div class="row" id="tela01"><h4>Genres: </h4></div>
+      <div class="row" id="tela4"></div>
+      <script>
+        fetch(
+          "https://api.rawg.io/api/games/12020?key=e48568ca0ba1496ab27f6df2d0597d66"
+        )
+          .then((res) => res.json())
+          .then(
+            (data) =>
+              (document.getElementById(
+                "tela"
+              ).innerHTML = `<h3>${data.name}<\h3>`)
+          );
+
+        fetch(
+          "https://api.rawg.io/api/games/12020?key=e48568ca0ba1496ab27f6df2d0597d66"
+        )
+          .then((res) => res.json())
+          .then(
+            (data) =>
+              (document.getElementById(
+                "tela1"
+              ).innerHTML = `<p>Description: ${data.description}</p>`)
+          );
+          fetch(
+          "https://api.rawg.io/api/games/12020?key=e48568ca0ba1496ab27f6df2d0597d66"
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            let str = "";
+            for (let i = 0; i < data.platforms.length; i++) {
+              let game = data.platforms[i];
+              str += `<div class="card col-md-3">
+                        <div class="card-body">
+                          <p>${game.platform.name}</p>
+                          </div>
+                        </div>`;
+            }
+            document.getElementById("telas").innerHTML = str;
+          });
+        fetch(
+          "https://api.rawg.io/api/games/12020?key=e48568ca0ba1496ab27f6df2d0597d66"
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            let str = "";
+            for (let i = 0; i < data.stores.length; i++) {
+              let game = data.stores[i];
+              str += `
+              <div class="card col-md-4">
+                        <div class="card-body">
+                          <p>${game.store.name}</p>
+                          </div>
+                        </div>`;
+            }
+            document.getElementById("tela3").innerHTML = str;
+          });
+          fetch(
+          "https://api.rawg.io/api/games/12020?key=e48568ca0ba1496ab27f6df2d0597d66"
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            let str = "";
+            for (let i = 0; i < data.genres.length; i++) {
+              let game = data.genres[i];
+              str += `
+              <div class="card col-md-4">
+                        <div class="card-body">
+                          <p>${game.name}</p>
+                          </div>
+                        </div>`;
+            }
+            document.getElementById("tela4").innerHTML = str;
+          });
+      </script>
+      <div class="row sbr">
+        <div class="col-12 col-lg-8">
+          <h2>Sobre</h2>
+          <p>
+            Site feito para o segundo trabalho prático da disciplina de
+            Desenvolvimento de Interfaces Web, ultilizando API do site RAWG.
+          </p>
+        </div>
+        <div class="col-12 col-lg-4">
+          <h2>Editorial</h2>
+          <p>Aluno: Rafael Rodrigues Oliveira</p>
+          <p>Matrícula: 789905</p>
+          <p>Curso: Ciência da computação</p>
+        </div>
+      </div>
+    </main>
+    <footer class="container footer">
+      <div class="row">
+        <p>
+          Copyright 2022 - Diciplina de Densenvolivimento de Interfaces Web -
+          ICEI PUC Minas
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
